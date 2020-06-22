@@ -1,0 +1,10 @@
+.nav-link {
+    padding: 10px;
+    font-size: 14px;
+    transition: background-color 0.5ms;
+}
+
+.nav-link-active {
+    background: blue;
+    color: white;
+}
