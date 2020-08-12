@@ -1,5 +1,4 @@
 import {Connection, MysqlError, OkPacket} from "mysql";
-import {Accesses} from "../models/Accesses";
 
 export abstract class BaseRepository<T> {
   readonly connection: Connection
@@ -28,7 +27,7 @@ export abstract class BaseRepository<T> {
       })
   }
   public closeConnection(): Promise<void> {
-    return new Promise((resolve, reject)=> {
+    return new Promise((resolve, reject) => {
       this.connection.end((err: MysqlError | undefined) => {
         if(err) reject(err)
         resolve()
@@ -40,5 +39,5 @@ export abstract class BaseRepository<T> {
   public abstract getById(id: string): Promise<T[] | void>
   public abstract save(t: T): Promise<T[] | void>
   public abstract delete(id: string): Promise<OkPacket | void>
-  public abstract update(oldItem: T, newItem: T): void
+  public abstract update(t: T): Promise<void>
 }

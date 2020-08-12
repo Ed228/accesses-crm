@@ -3,13 +3,8 @@ import {Accesses} from "../Accesses";
 export class AccessesBuilder {
   private accesses: Accesses = new Accesses()
 
-  setAccessesId(accessesId: number) {
-    this.accesses.accessesId = accessesId
-    return this
-  }
-
-  setCreatureDate(creatureDate: Date) {
-    this.accesses.creatureDate = creatureDate
+  setPhone(phone: string) {
+    this.accesses.phone = phone
     return this
   }
 
@@ -23,15 +18,12 @@ export class AccessesBuilder {
     return this
   }
 
-  setUserName(userName: string) {
-    this.accesses.userName = userName
+  setClientName(clientName: string) {
+    this.accesses.clientName = clientName
     return this
   }
 
   build() {
-    if(Object.values(this.accesses).every(value => value !== undefined)){
       return this.accesses
-    }
-    return
   }
 }

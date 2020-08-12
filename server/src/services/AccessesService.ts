@@ -1,12 +1,12 @@
 import {AccessesRepository} from "../repositories/AccessesRepository"
-import {Factory} from "../factories/Factory"
+import {AccessesFactory} from "../factories/AccessesFactory"
 import {OkPacket} from "mysql";
 
 export class AccessesService<IAccesses> {
   private repository: AccessesRepository<IAccesses>
-  private factory: Factory
+  private factory: AccessesFactory
 
-  constructor(repository: AccessesRepository<IAccesses>, factory: Factory) {
+  constructor(repository: AccessesRepository<IAccesses>, factory: AccessesFactory) {
     this.repository = repository;
     this.factory = factory;
   }
@@ -25,6 +25,10 @@ export class AccessesService<IAccesses> {
 
   public save(a: IAccesses): Promise<IAccesses[] | void> {
     return this.repository.save(a)
+  }
+
+  public update(a: IAccesses): Promise<void> {
+    return this.repository.update(a)
   }
 
 }

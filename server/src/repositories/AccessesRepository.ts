@@ -1,10 +1,7 @@
-import {IRepository} from "./interfaces/IRepository"
 import mysql, {Connection, OkPacket} from 'mysql'
-import {MysqlError} from "mysql";
 import {Accesses} from "../models/Accesses";
 import {BaseRepository} from "./BaseRepository";
 import {DataBaseMapper} from "./DataBaseMapper";
-import {IAccesses} from "../models/interfaces/IAccesses";
 
 export class AccessesRepository<IAccesses> extends BaseRepository<IAccesses>{
   private dataBaseMapper: DataBaseMapper = new DataBaseMapper()
@@ -18,28 +15,26 @@ export class AccessesRepository<IAccesses> extends BaseRepository<IAccesses>{
       .then(rows => {
         if(rows) return rows.map((row: any) => this.dataBaseMapper.getObjectFromData(row, Accesses))
       })
-
   }
 
-  public save(accesses: IAccesses): Promise<IAccesses[] | void> {
-    return this.query("INSERT INTO accesses (message, creaturedate, username, email, phone) VALUES (?,?,?,?,?)",
+  public save(accesses: Accesses): Promise<IAccesses[] | void> {
+    return this.query("INSERT INTO accesses (message, creaturedate, clientName, email, phone) VALUES (?,?,?,?,?)",
       this.dataBaseMapper
-        .getDataFromObject(accesses as Accesses, "message", "creatureDate", "userName", "email", "phone"))
+        .getDataFromObject(accesses, "message", "creatureDate", "clientName", "email", "phone"))
   }
 
-  public getById(id: string): Promise<IAccesses[] | void> {
-    return this.query("select * from accesses where AccessesId = ?"
-    , [id]).then(data => this.dataBaseMapper.getObjectFromData(data, Accesses))
+  public getById(clientNameLikeId: string): Promise<IAccesses[] | void> {
+    return this.query("select * from accesses where clientName = ?"
+    , [clientNameLikeId]).then(data => this.dataBaseMapper.getObjectFromData(data, Accesses))
   }
 
-  public delete(id: string): Promise<OkPacket | void> {
-    this.query("delete from accesses where AccessesId = ?", [id])
-      .then(okPacket => console.log(okPacket));
-    return this.query("delete from accesses where AccessesId = ?", [id])
+  public delete(clientNameLikeId: string): Promise<OkPacket | void> {
+    return this.query("delete from accesses where clientName = ?", [clientNameLikeId])
       .then(okPacket => okPacket)
   }
 
-  public update(t: IAccesses): void {
-
+  public update(newItem: Accesses): Promise<void> {
+    return this.query("update accesses set message = ?, email = ?, phone = ? where clientName = ?",
+      this.dataBaseMapper.getDataFromObject(newItem, 'message', 'email', 'phone', 'clientName'))
   }
 }

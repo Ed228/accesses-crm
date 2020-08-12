@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 *:focus,
@@ -21,22 +21,22 @@
   --white: #fff;
 
   /* Main Color Scheme */
-  --main: #3a4d64;
-  --main-dark: #333d4a;
-  --main-light: ;
+  --main: #3178c6;
+  --main-dark: #2964a3;
+  --main-light: #adcbeb;
 
   /* Accent Color Scheme */
-  --accent: ;
+  /* --accent: ;
   --accent-dark: ;
-  --accent-light: ;
+  --accent-light: ; */
 
   /* Gray Colors */
   --gray: #d1cee1;
-  --gray-dark: ;
+  /*--gray-dark: ;*/
   --gray-light: #f3f5f9;
 
   /* Fonts */
-  --serif: ;
+  /*--serif: ;*/
   --sans-serif: "Montserrat", sans-serif; /*300, 400, 600, 800*/
 }
 

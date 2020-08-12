@@ -5,6 +5,6 @@
 }
 
 .nav-link-active {
-    background: blue;
+    background: var(--main);
     color: white;
 }

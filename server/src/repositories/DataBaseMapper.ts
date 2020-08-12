@@ -12,7 +12,6 @@ export class DataBaseMapper {
   }
 
   public getDataFromObject<T, K extends keyof T>(object: T, ...keys: K[]): any[] {
-    //console.log(keys.map(key => object[key]))
     return keys.map(key => object[key])
   }
 }

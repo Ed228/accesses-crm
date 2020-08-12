@@ -1,6 +1,9 @@
 import * as React from 'react'
 import NavLink from "../Navlink/NavLink";
-import {MouseEvent} from "react";
+import { MouseEvent } from "react";
+import {useDispatch, useSelector, shallowEqual} from "react-redux";
+import { changeActiveNavLink } from "../../store/actions/navLinkActions";
+import { ActiveNavLinkState } from  '../../store/types'
 
 interface NavLink {
   link: string,
@@ -8,12 +11,18 @@ interface NavLink {
   onClick: (e: MouseEvent<HTMLAnchorElement>) => void
 }
 
+interface RootNavLinkState {
+  navLink: ActiveNavLinkState
+}
+
 export default function NavBar() {
-  const [activeNavLink, setActiveNavLink] = React.useState(0)
+  const activeNavIndex: number =
+    useSelector((state: RootNavLinkState) => state.navLink.activeLinkIndex)
+  const dispatch = useDispatch()
+
   const onClickNavLink = (e: MouseEvent, index: number) => {
     e.preventDefault()
-    console.log('click')
-    setActiveNavLink(index)
+    dispatch(changeActiveNavLink(index))
   }
 
   const NavBarContent: NavLink[] = [
@@ -38,7 +47,7 @@ export default function NavBar() {
       {
         NavBarContent.map((navLink: NavLink, index: number) => {
           return <NavLink
-            active={index === activeNavLink}
+            active={index === activeNavIndex}
             link={navLink.link}
             text={navLink.text}
             onClick={navLink.onClick}

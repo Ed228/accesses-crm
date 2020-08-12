@@ -1,0 +1,29 @@
+.create-accesses-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-accesses-form > label {
+    padding: 5px;
+}
+
+.create-accesses-form > input {
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px #c3c3c3 solid;
+}
+
+.create-accesses-form > button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    margin-top: 5px;
+    font-size: 18px;
+    background: var(--main);
+    color: white;
+    border: none;
+}
+
+.create-accesses-form > button:hover {
+
+}
